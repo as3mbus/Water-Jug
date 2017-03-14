@@ -21,7 +21,7 @@ class WaterJug:
 
         self.startState=self.joinStates(self.states,self.connecter) # make string with start state "0 0"
         self.mem={self.startState:[]} #make dictionary with keys "0 0" with value empty array
-        self.bestPath=[]
+        self.bestPath=[] #make empty array for best state
 
         self.compleetSearch()
 
@@ -77,14 +77,14 @@ class WaterJug:
                 self.states=self.splitStates(elment,self.connecter) #reassign glass state
                 self.compleetSearch() #re search
 
-    def splitStates(self,elment,elm):
+    def splitStates(self,elment,elm): #split state to list of glass state
         tmplst=[]
         for i in elment.split(self.connecter): #split to glass state
             tmplst.append(int(i))  #append glass state
 
         return tmplst #return glass state
 
-    def joinStates(self,stat,elm):
+    def joinStates(self,stat,elm): #combine state list to become a string containing glass state's
         st=[]
         for each in stat:
             st.append(str(each)) #add stat element (string) in array
@@ -99,7 +99,7 @@ if __name__=="__main__": #jika python script is being run. not imported
     for i in range(0,N): #for eeach test
         store=WaterJug(fileptr)  #do stuff in function
         store.compleetSearch()
-        print "Sorted Breadth first:",store.mem
+        print "Sorted Breadth first:",store.mem #print all possible state and state change
     #print "all Successfull Paths:"
-        store.findSuccessfullPaths([store.startState])
-        outptr.write("Case "+str(i)+":"+str(store.bestPath)+'\n')
+        store.findSuccessfullPaths([store.startState]) # find best state
+        outptr.write("Case "+str(i)+":"+str(store.bestPath)+'\n') #write best state to file
